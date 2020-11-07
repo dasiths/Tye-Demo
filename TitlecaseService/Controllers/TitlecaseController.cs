@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace UppercaseService.Controllers
+namespace TitlecaseService.Controllers
 {
     [ApiController]
     [Route("")]
-    public class UppercaseController : ControllerBase
+    public class TitlecaseController : ControllerBase
     {
-        private readonly ILogger<UppercaseController> _logger;
+        private readonly ILogger<TitlecaseController> _logger;
 
-        public UppercaseController(ILogger<UppercaseController> logger)
+        public TitlecaseController(ILogger<TitlecaseController> logger)
         {
             _logger = logger;
         }
@@ -22,7 +23,7 @@ namespace UppercaseService.Controllers
         public ActionResult<string> Get(string sentence)
         {
             _logger.LogInformation($"{GetType().Name} triggered with sentence={sentence}");
-            return sentence.ToUpper();
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(sentence);
         }
     }
 }

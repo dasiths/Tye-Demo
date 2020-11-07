@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace UppercaseService.Controllers
+namespace LowercaseService.Controllers
 {
     [ApiController]
     [Route("")]
-    public class UppercaseController : ControllerBase
+    public class LowercaseController : ControllerBase
     {
-        private readonly ILogger<UppercaseController> _logger;
+        private readonly ILogger<LowercaseController> _logger;
 
-        public UppercaseController(ILogger<UppercaseController> logger)
+        public LowercaseController(ILogger<LowercaseController> logger)
         {
             _logger = logger;
         }
@@ -22,7 +22,7 @@ namespace UppercaseService.Controllers
         public ActionResult<string> Get(string sentence)
         {
             _logger.LogInformation($"{GetType().Name} triggered with sentence={sentence}");
-            return sentence.ToUpper();
+            return sentence.ToLower();
         }
     }
 }
