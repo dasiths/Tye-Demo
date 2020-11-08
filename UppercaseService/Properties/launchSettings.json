@@ -20,7 +20,7 @@
     "UppercaseService": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "?sentence=this is a test sentence",
+      "launchUrl": "uppercase?sentence=this is a test sentence",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

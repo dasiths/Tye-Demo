@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shared;
 
 namespace UppercaseService.Controllers
 {
     [ApiController]
-    [Route("")]
+    [Route("[controller]")]
     public class UppercaseController : ControllerBase
     {
         private readonly ILogger<UppercaseController> _logger;
@@ -19,10 +20,14 @@ namespace UppercaseService.Controllers
         }
 
         [HttpGet]
-        public ActionResult<string> Get(string sentence)
+        public ActionResult<ConvertedResult> Get(string sentence)
         {
             _logger.LogInformation($"{GetType().Name} triggered with sentence={sentence}");
-            return sentence.ToUpper();
+            return new ConvertedResult()
+            {
+                Original = sentence,
+                Sentence = sentence.ToUpper()
+            };
         }
     }
 }

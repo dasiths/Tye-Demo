@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shared;
 
 namespace LowercaseService.Controllers
 {
     [ApiController]
-    [Route("")]
+    [Route("[controller]")]
     public class LowercaseController : ControllerBase
     {
         private readonly ILogger<LowercaseController> _logger;
@@ -19,10 +20,14 @@ namespace LowercaseService.Controllers
         }
 
         [HttpGet]
-        public ActionResult<string> Get(string sentence)
+        public ActionResult<ConvertedResult> Get(string sentence)
         {
             _logger.LogInformation($"{GetType().Name} triggered with sentence={sentence}");
-            return sentence.ToLower();
+            return new ConvertedResult()
+            {
+                Original = sentence,
+                Sentence = sentence.ToLower()
+            };
         }
     }
 }

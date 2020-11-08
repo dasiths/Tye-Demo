@@ -1,6 +1,12 @@
 ﻿@page "/"
 @using Microsoft.Extensions.Logging
+@using Dapr.Client
+@using SentenceApp.Services
 @inject ILogger<CaseConverter> logger
+<!--inject DaprClient daprClient-->
+@inject UppercaseServiceClient uppercaseClient
+@inject LowercaseServiceClient lowercaseClient
+@inject TitlecaseServiceClient titlecaseClient
 
 <h1>Case Converter</h1>
 
@@ -25,21 +31,21 @@
     private async Task UpperCase()
     {
         logger.LogInformation($"UpperCase UI triggered with sentence={sentence}");
-        sentence = sentence.ToUpper();
+        sentence = (await uppercaseClient.Convert(sentence)).Sentence;
         currentCount = sentence.Length;
     }
 
     private async Task LowerCase()
     {
         logger.LogInformation($"LowerCase UI triggered with sentence={sentence}");
-        sentence = sentence.ToUpper();
+        sentence = (await lowercaseClient.Convert(sentence)).Sentence;
         currentCount = sentence.Length;
     }
 
     private async Task TitleCase()
     {
         logger.LogInformation($"TitleCase UI triggered with sentence={sentence}");
-        sentence = sentence.ToUpper();
+        sentence = (await titlecaseClient.Convert(sentence)).Sentence;
         currentCount = sentence.Length;
     }
 }
