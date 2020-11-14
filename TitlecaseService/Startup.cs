@@ -41,7 +41,8 @@ namespace TitlecaseService
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // Https Redirection isn't supported by Tye Dapr extension yet https://github.com/dotnet/tye/issues/765
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
